@@ -56,9 +56,9 @@
               %b
                 ="#{t(:mission_statement)}:"
               =project.mission_statement
-            -if user_signed_in? and (isFav(project.id) == true)
+            -if isFav(project.id) == true
               =link_to raw('<i class="icon-star"></i>'), remove_favorite_path(project), :class => "btn" #test
-            -elsif user_signed_in?
+            -else
               =link_to raw('<i class="icon-star-empty"></i>'), add_favorite_path(project), :class => "btn" #test
                 
 
