@@ -1,10 +1,6 @@
 class Issue < ActiveRecord::Base
   belongs_to :project
   has_many :tags
-
-  has_many   :favorite_issues, :dependent => :destroy
-  has_many   :favorited_issues, :through => :favorite_issues, :source => :user
-
   attr_accessible :description, :resolved, :title
 
   validates :title, :presence => true,
