@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   def show
     if user_signed_in?
-      @projects = Project.find_all_by_user_id(current_user.id)
+      @projects = Project.order("created_at DESC").find_all_by_user_id(current_user.id)
       @favorites = current_user.favorite_projects
     else
       redirect_to new_user_session_path, notice: 'Please log in to view your dashboard.'
@@ -10,8 +10,8 @@ class UserController < ApplicationController
   
   def admin_dashboard
     @questions = Question.current_questions
-    @unapproved_projects = Project.unapproved_projects.paginate(:page => params[:page], :per_page => 5)
-    @denied_projects = Project.denied_projects.paginate(:page => params[:page], :per_page => 5)
+    @unapproved_projects = Project.order("created_at DESC").unapproved_projects.paginate(:page => params[:page], :per_page => 5)
+    @denied_projects = Project.order("created_at DESC").denied_projects.paginate(:page => params[:page], :per_page => 5)
     @emails = []
     users = User.connection.select_all("SELECT email,fname,lname FROM users")
     users.each do |u|
@@ -33,12 +33,12 @@ class UserController < ApplicationController
     @user = User.find_by_email(@email)
     if @user and not @user.admin?
       @user.update_attributes(:admin=>true)
-      redirect_to user_settings_path, notice: "#{@user.fname} #{@user.lname} is now an admin."      
+      redirect_to user_admin_dashboard_path, notice: "#{@user.fname} #{@user.lname} is now an admin."      
     elsif @user and @user.admin?
-      redirect_to user_settings_path, notice: "#{@user.fname} #{@user.lname} is already an admin."      
+      redirect_to user_admin_dashboard_path, notice: "#{@user.fname} #{@user.lname} is already an admin."      
     else
       flash[:error] =  "#{@email} does not exist. Would you like to create a user?"
-      redirect_to user_settings_path    
+      redirect_to user_admin_dashboard_path    
     end
   end
 
@@ -58,7 +58,7 @@ class UserController < ApplicationController
     @user = User.find_by_id(params[:id])
     if @user and @user.admin?
       @user.update_attributes(:admin=>false)
-      redirect_to user_settings_path, notice: "#{@user.fname} #{@user.lname} is no longer an admin."
+      redirect_to add_admin_path, notice: "#{@user.fname} #{@user.lname} is no longer an admin."
     else
       flash[:error] = "Your action is invalid."
       redirect_to user_settings_path
