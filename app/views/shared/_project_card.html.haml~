@@ -49,31 +49,18 @@
                 %a#application_site_edit.btn-link
                   %i.icon-pencil
               -else  
-<<<<<<< HEAD
+
                 =link_to(project.application_site, url_with_http(project.application_site), :target => "_blank")
           .span6
             %p
               %b
                 ="#{t(:mission_statement)}:"
               =project.mission_statement
-            -if user_signed_in? and (isFav(project.id) == true)
+            -if user_signed_in? and (isFavIssue(issue.id) == true)
               =link_to raw('<i class="icon-star"></i>'), remove_favorite_path(project), :class => "btn" #test
             -elsif user_signed_in?
               =link_to raw('<i class="icon-star-empty"></i>'), add_favorite_path(project), :class => "btn" #test
-=======
-                =link_to(project.application_site, url_with_http(project.application_site), :target => "_blank")   
-          .mission-statement
-            .span12
-              %p
-                %b
-                  ="#{t(:mission_statement)}:"
-                =project.mission_statement
-              -if isFav(project.id) == true
-                =link_to raw('<i class="icon-star"></i>'), remove_favorite_path(project), :class => "btn" #test
-              -else
-                =link_to raw('<i class="icon-star-empty"></i>'), add_favorite_path(project), :class => "btn" #test
 
->>>>>>> upstream/master
                 
 =render :partial => 'projects/submit_form_popup', :locals => {:project => project}
 

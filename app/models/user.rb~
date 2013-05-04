@@ -16,5 +16,6 @@ class User < ActiveRecord::Base
   has_many :favorite_projects, :through => :favorites, :source => :project
 
   has_many :issues, :dependent => :destroy
+  has_many :favorite_issues, :dependent => :destroy
   has_many :favorite_issues, :through => :favorite_issues, :source => :issue
 end

@@ -12,16 +12,4 @@ module IssuesHelper
 		end
 		return allTags
 	end
-
-    def isFavIssue(id)
-		issue = Issue.find(id)
-	    favissue = FavoriteIssue.where("issue_id = ? AND user_id = ?", issue.id, current_user).limit(1)
-	    p favissue
-	    if favissue.empty?
-	      return false
-	    else
-	      return true
-	    end
-	end
-
 end

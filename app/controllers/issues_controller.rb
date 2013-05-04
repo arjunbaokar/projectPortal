@@ -130,8 +130,17 @@ class IssuesController < ApplicationController
     end
   end
 
-  def favorite:
-    
+  def favorite
+    @issue = Issue.find(params[:id])
+    current_user.fav_issues.create :issue => @issue
+    redirect_to project_path(@issue)
+  end
+
+  def unfavorite
+    @issue = Issue.find(params[:id])
+    @favoritedissue = FavoriteIssue.where("issue_id = ? AND user_id = ?", @issue.id, current_user).limit(1)
+    current_user.fav_issues.delete(@favoritedissue)
+    redirect_to project_path(@issue)
   end
 
   def destroy

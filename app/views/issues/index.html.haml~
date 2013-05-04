@@ -14,7 +14,7 @@
             %b.p Description
             .description-all= issue.description
         %p
-          -if user_signed_in? and (isFavIssue(issue.id) == true)
+          -if user_signed_in? and (isFav(issue.id) == true)
             =link_to raw('<i class="icon-star"></i>'), remove_fav_issue_path(issue), :class => "btn" #test
           -elsif user_signed_in?
             =link_to raw('<i class="icon-star-empty"></i>'), add_fav_issue_path(issue), :class => "btn" #test
