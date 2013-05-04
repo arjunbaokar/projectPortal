@@ -13,9 +13,6 @@ class Project < ActiveRecord::Base
   has_many   :favorites, :dependent => :destroy
   has_many   :favorited, :through => :favorites, :source => :user
   has_and_belongs_to_many :favorite_users, :class_name => "User"
-
-  has_many   :favorite_issues, :dependent => :destroy
-  has_many   :favorited_issues, :through => :favorite_issues, :source => :user
   
   attr_accessible :questions, :title, :nonprofit, :five_01c3, :github_site, :company_site, :company_address, 
   :application_site, :mission_statement, :contact_name, :contact_position, :contact_email, :contact_number, 
@@ -24,6 +21,7 @@ class Project < ActiveRecord::Base
   attr_accessor :comment
 
   attr_accessible :user_id, :as=>:admin
+  attr_accessible :issue
   
   validates :title, :company_site, :company_address, :company_name,
   :mission_statement, :contact_name, :contact_position, :contact_email, :contact_number, 

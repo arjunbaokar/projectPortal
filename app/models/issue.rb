@@ -4,6 +4,7 @@ class Issue < ActiveRecord::Base
 
   has_many   :favorite_issues, :dependent => :destroy
   has_many   :favorited_issues, :through => :favorite_issues, :source => :user
+  has_and_belongs_to_many :favorite_users, :class_name => "User"
 
   attr_accessible :description, :resolved, :title
 
