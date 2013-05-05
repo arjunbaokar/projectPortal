@@ -20,6 +20,6 @@
             =link_to raw('<i class="icon-star-empty"></i>'), add_fav_issue_path(issue), :class => "btn" #test
           
           .pull-right.view-btn-all= link_to raw('<i class="icon-star-empty"></i>'), '#', :class => 'btn'
-          a.pull-right.view-btn-all{:class => "btn", :href => project_issue_path(issue.project_id,issue.id) } View
+
 =render :partial => 'shared/pagination'
 

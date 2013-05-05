@@ -18,8 +18,6 @@
             =link_to raw('<i class="icon-star"></i>'), remove_fav_issue_path(issue), :class => "btn" #test
           -elsif user_signed_in?
             =link_to raw('<i class="icon-star-empty"></i>'), add_fav_issue_path(issue), :class => "btn" #test
-          
-          .pull-right.view-btn-all= link_to raw('<i class="icon-star-empty"></i>'), '#', :class => 'btn'
 
 =render :partial => 'shared/pagination'
 
